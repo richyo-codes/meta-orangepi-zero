@@ -21,3 +21,14 @@ Start with a single-slot card and check the HDMI login console. The kernel
 initializes the display, so capture SPL and U-Boot using the serial console.
 On the board, check `cat /sys/class/drm/card*-HDMI-A-*/status` and confirm
 that the connector reports `connected` with the monitor attached.
+
+## U-Boot
+
+The layer also selects upstream U-Boot 2026.10 for `orange-pi-zero3`.
+The prior 2026.01 image reached U-Boot on the physical board and its last
+reported UART line was `DRAM: 2 GiB (total 0 Bytes)`. The new pin includes
+upstream fixes for non-power-of-two DRAM sizes and changes to early bank
+setup and relocation. Armbian's reference image uses the same base tag.
+Yocto retains its board defconfig, TF-A and boot script. A cold boot over
+UART should reach the MMC probe and `Starting kernel`; until that test
+passes, the specific cause of the old stop remains unconfirmed.
