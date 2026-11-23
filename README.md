@@ -16,7 +16,7 @@ testing this patch set. Recheck it on each Linux version bump and drop the
 backport once a supported kernel provides the complete pipeline upstream.
 
 For an existing Orange Pi build, add this directory with
-`bitbake-layers add-layer /path/to/meta-richyo-sunxi`, then rebuild the image.
+`bitbake-layers add-layer /path/to/meta-orangepi-zero`, then rebuild the image.
 Start with a single-slot card and check the HDMI login console. The kernel
 initializes the display, so capture SPL and U-Boot using the serial console.
 On the board, check `cat /sys/class/drm/card*-HDMI-A-*/status` and confirm
