@@ -5,6 +5,7 @@ DESCRIPTION = "Linux LTS with the Armbian HDMI backport for Orange Pi Zero 3"
 COMPATIBLE_MACHINE = "^orange-pi-zero3$"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 SRC_URI[sha256sum] = "81764a545072d160748beff4d9de2e7d95aa9f16e8261110288f067a2cc61d71"
+SRC_URI:append:orange-pi-zero3 = " file://orange-pi-zero3-ethernet.cfg"
 
 # The BSP's defconfig and base patches remain in the upstream layer.
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"

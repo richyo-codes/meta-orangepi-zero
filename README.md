@@ -22,6 +22,13 @@ initializes the display, so capture SPL and U-Boot using the serial console.
 On the board, check `cat /sys/class/drm/card*-HDMI-A-*/status` and confirm
 that the connector reports `connected` with the monitor attached.
 
+## Ethernet
+
+Orange Pi Zero 3 images built with this layer install the Allwinner DWMAC
+driver, its dependencies and the Motorcomm YT8531 PHY driver. The image's
+network manager remains responsible for DHCP. Check driver binding and carrier
+in the kernel journal, then confirm an IPv4 lease with `ip -4 addr show`.
+
 ## U-Boot
 
 The layer also selects upstream U-Boot 2026.10 for `orange-pi-zero3`.
