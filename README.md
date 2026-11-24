@@ -29,6 +29,13 @@ driver, its dependencies and the Motorcomm YT8531 PHY driver. The image's
 network manager remains responsible for DHCP. Check driver binding and carrier
 in the kernel journal, then confirm an IPv4 lease with `ip -4 addr show`.
 
+## Onboard SPI flash
+
+The built-in SPI0 driver at `5010000.spi` requests DMA channels from the
+modular Allwinner DMA driver. Include `kernel-module-sun6i-dma` in the image
+so the kernel can bind SPI0 and discover the onboard SPI NOR. The SD card
+boots through a separate MMC controller.
+
 ## U-Boot
 
 The layer also selects upstream U-Boot 2026.10 for `orange-pi-zero3`.
