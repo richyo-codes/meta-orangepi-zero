@@ -1,0 +1,11 @@
+[Unit]
+Description=Attach the UWE5622 Bluetooth controller
+BindsTo=dev-ttyBT0.device
+After=dev-ttyBT0.device systemd-modules-load.service
+
+[Service]
+ExecStartPre=@SBINDIR@/modprobe hci_uart
+ExecStartPre=@SBINDIR@/rfkill unblock bluetooth
+ExecStart=@BINDIR@/btattach -B /dev/ttyBT0 -P h4 -S 1500000
+Restart=on-failure
+RestartSec=3s

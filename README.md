@@ -36,6 +36,27 @@ modular Allwinner DMA driver. Include `kernel-module-sun6i-dma` in the image
 so the kernel can bind SPI0 and discover the onboard SPI NOR. The SD card
 boots through a separate MMC controller.
 
+## Onboard Bluetooth
+
+The Zero 3 kernel enables the UWE5622 SDIO host, the board's radio power
+sequence, and the pinned [Armbian UWE5622 driver](https://github.com/armbian/uwe5622/tree/ef4ac088ae4cfb468843199e64d57589aacf22d0).
+Install `uwe5622-bluetooth` to attach `ttyBT0` with BlueZ `btattach`. The
+recipe fetches the radio calibration files at build time. The Linux patches
+retain their upstream licensing. Before distributing a built image, check the
+separate redistribution terms for radio firmware and calibration files.
+
+On the board, `bluetoothctl list` should show the controller. If it is absent,
+check the kernel log for SDIO detection and `journalctl -b -u
+uwe5622-bluetooth.service` for the attach result.
+
+The Zero 3 kernel configuration disables `ARCH_ROCKCHIP`. With both
+architectures enabled, UWE5622 revision `ef4ac088` selects both sets of build
+flags. Rockchip's `CONFIG_WCN_PARSE_DTS` prevents registration of the
+Allwinner platform device. On Linux 6.18.63, loading `sprdbt_tty` during boot
+then hits a NULL dereference in `get_loopcheck_status` through `stop_marlin`
+and `rfkill_register`. Boot validation should show `marlin_probe ok!` and
+reach the serial login, followed by Bluetooth controller discovery.
+
 ## U-Boot
 
 The layer also selects upstream U-Boot 2026.10 for `orange-pi-zero3`.

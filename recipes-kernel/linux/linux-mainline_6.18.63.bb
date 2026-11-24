@@ -11,6 +11,7 @@ SRC_URI:append:orange-pi-zero3 = " file://orange-pi-zero3-ethernet.cfg"
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 FILESEXTRAPATHS:append := ":${RICHYO_SUNXI_BSPDIR}/recipes-kernel/linux/linux-mainline:${RICHYO_SUNXI_BSPDIR}/recipes-kernel/linux/files"
 require orange-pi-zero3-hdmi.inc
+require orange-pi-zero3-radio.inc
 
 # Preserve Armbian's signed-off patch files byte-for-byte. The commit URL
 # and checksums above record provenance for this third-party patch series.
